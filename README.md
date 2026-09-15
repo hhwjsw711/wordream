@@ -1,36 +1,78 @@
+<div align="center">
+
+# Wordream
+
+**Prompt-to-Video AI Creator for iPhone**
+
+Describe a video in plain words. Get a finished, ready-to-share clip in minutes.
+
+[wordream.com](https://wordream.com) · [Compare](https://wordream.com/compare) · [Contact](https://wordream.com/contact)
+
+</div>
+
 ---
-AIGC:
-  ContentProducer: '001191110102MAD55U9H0F10002'
-  ContentPropagator: '001191110102MAD55U9H0F10002'
-  Label: '1'
-  ProduceID: '61c2da60-2760-4adf-9c5a-7e6113d6419c'
-  PropagateID: '61c2da60-2760-4adf-9c5a-7e6113d6419c'
-  ReservedCode1: '86771efc-75b8-4359-8134-6e6f8a924ac5'
-  ReservedCode2: '86771efc-75b8-4359-8134-6e6f8a924ac5'
----
 
-# Wordream — Landing Page
+<div align="center">
+  <img src="docs/wordream-hero.png" alt="Wordream — Automatic clips. In a word, easy" width="800">
+</div>
 
-[Wordream](https://wordream.com) 的官网 landing page。Prompt-to-Video AI Creator for iPhone。
+## Overview
 
-线上地址：**https://wordream.com**
+This repository contains the official **Wordream** marketing site — the landing page, competitor comparisons, and legal pages for the Wordream iPhone app.
 
-## 项目说明
+Wordream turns a plain-language idea into a polished video: the AI drafts the structure and script, builds the edit with motion, text, music and voiceover, and lets you refine everything through chat or a timeline editor before export.
 
-- 一比一复刻 [reelful.app](https://www.reelful.app/) 新版首页的视觉与动效（品牌替换为 Wordream）
-- 技术栈：Astro 7 + Tailwind CSS v4 + GSAP 3.15（ScrollTrigger）+ Lenis 平滑滚动
-- 9 个页面：首页、Compare 索引 + 4 个对比详情页（vs CapCut / Edits / Captions / video-editing MCPs）、Terms、Privacy、Contact
-- 动效：Hero 入场时间线、滚动视差、区块 reveal、磁性按钮、showcase 轮播（点激活卡切静音、触摸滑动、视频预加载首帧）
-- 滚动条：桌面隐藏原生滚动条仅显示自定义橙色滚动条，触屏显示原生橙色细条
-- SEO：JSON-LD（SoftwareApplication + Article）、og:image、canonical、manifest
-- 无障碍：reduced-motion 关怀、aria 同步、focus-visible
+**Live site: [wordream.com](https://wordream.com)**
 
-## 页面清单
+## Screenshots
 
-| 路径 | 页面 |
+| Hero | Why Wordream |
+|:---:|:---:|
+| <img src="docs/wordream-hero.png" width="390"> | <img src="docs/wordream-why.png" width="390"> |
+| **How it works** | **Plans** |
+| <img src="docs/wordream-how.png" width="390"> | <img src="docs/wordream-pricing.png" width="390"> |
+| **Final CTA** | **Compare** |
+| <img src="docs/wordream-cta.png" width="390"> | <img src="docs/wordream-compare.png" width="390"> |
+
+## Tech Stack
+
+- **[Astro 7](https://astro.build)** — static site generation, zero JS by default
+- **[Tailwind CSS v4](https://tailwindcss.com)** — design tokens & utilities
+- **[GSAP 3.15](https://gsap.com)** — hero entrance timeline, scroll parallax, section reveals, magnetic buttons
+- **[Lenis](https://lenis.darkroom.engineering)** — smooth scrolling (desktop pointer devices only, respects reduced-motion)
+
+## Features
+
+**Motion & interaction**
+
+- Hero entrance timeline with staged reveals
+- Scroll-linked parallax on the hero section
+- In-view section reveals (`once` semantics, no layout shift)
+- Magnetic hover effect on primary CTAs
+- Showcase carousel: tap the active card to unmute, swipe on touch devices, videos pre-seek their first frame, full `aria` state sync
+
+**Scrollbar system**
+
+- Desktop pointer devices: native scrollbar hidden, custom ember-colored scrollbar rendered in-app
+- Touch devices: native thin scrollbar themed ember
+
+**SEO & social**
+
+- JSON-LD (`SoftwareApplication` on the home page, `Article` on comparison pages)
+- Open Graph & Twitter card with dedicated og:image
+- Canonical URLs, PWA manifest, theme color
+
+**Accessibility**
+
+- `prefers-reduced-motion` short-circuits all entrance animations and smooth scrolling
+- Keyboard focus styles, aria-live carousel labels, semantic landmarks
+
+## Pages
+
+| Path | Content |
 |---|---|
-| `/` | 首页（Hero / Why / How it works / Pricing / CTA） |
-| `/compare` | 对比索引页 |
+| `/` | Hero · Why · How it works · Plans · CTA |
+| `/compare` | Comparison hub |
 | `/compare/reelful-vs-capcut` | Wordream vs. CapCut |
 | `/compare/reelful-vs-edits` | Wordream vs. Edits (by Instagram) |
 | `/compare/reelful-vs-captions` | Wordream vs. Captions |
@@ -39,26 +81,33 @@ AIGC:
 | `/privacy` | Privacy Policy |
 | `/contact` | Contact |
 
-## Commands
+## Getting Started
 
-| Command           | Action                                           |
-| :---------------- | :----------------------------------------------- |
-| `bun install`     | Installs dependencies                            |
-| `bun dev`         | Starts local dev server at `localhost:4321`      |
-| `bun build`       | Build your production site to `./dist/`          |
-| `bun preview`     | Preview your build locally, before deploying     |
-| `bun astro ...`   | Run CLI commands like `astro add`, `astro check` |
+```sh
+bun install
+bun dev        # http://localhost:4321
+bun build      # outputs to ./dist
+bun preview    # preview the production build
+```
 
-## 部署
+## Deployment
 
-- 托管：Vercel（push 即自动部署）
-- DNS：Cloudflare（仅 DNS 模式，不套代理）
-- CTA 占位链接 `https://apps.apple.com/app/wordream` 待 App 上架后替换为真实 App Store 链接
+The site is hosted on **Vercel** — every push to `master` triggers an automatic deployment.
 
-## TODO
+DNS is managed by Cloudflare (DNS-only mode). The custom scrollbar, font preloading and caching headers behave exactly as they do on other Vercel-hosted static sites.
 
-- [ ] App 上架后替换 CTA 占位链接
-- [ ] 接入 GA / Meta Pixel / Clarity（等账号）
-- [ ] OneLink UTM 归因（等 OneLink 账号）
+## Roadmap
 
-> AI生成
+- [ ] Replace App Store placeholder links once the app ships
+- [ ] Analytics: GA4, Meta Pixel, Microsoft Clarity
+- [ ] Attribution: OneLink with UTM parameters
+
+## License
+
+© 2026 Wordream. All rights reserved.
+
+---
+
+<div align="center">
+  <sub>Automatic clips. In a word, easy.</sub>
+</div>
