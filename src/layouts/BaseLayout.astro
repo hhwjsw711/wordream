@@ -50,10 +50,10 @@ const APP_STORE_PLACEHOLDER = "https://apps.apple.com/app/wordream";
     <meta property="og:image" content="https://wordream.com/assets/og-image-v3.jpg" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Wordream — Prompt-to-Video AI Creator for iPhone" />
+    <meta property="og:image:alt" content="Wordream — the prompt-to-video AI creator in your pocket" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="https://wordream.com/assets/og-image-v3.jpg" />
-    <meta name="twitter:image:alt" content="Wordream — Prompt-to-Video AI Creator for iPhone" />
+    <meta name="twitter:image:alt" content="Wordream — the prompt-to-video AI creator in your pocket" />
 
     <title>{title ?? "Wordream — Prompt-to-Video AI Creator for iPhone"}</title>
   </head>
@@ -123,14 +123,46 @@ const APP_STORE_PLACEHOLDER = "https://apps.apple.com/app/wordream";
     <div class="site-scrollbar" aria-hidden="true" hidden></div>
 
     <script>
-      // ===== Lenis 平滑滚动 =====
+      // ===== Lenis 平滑滚动（参数对齐原作 reelful.app）=====
       import Lenis from "lenis";
-      const lenis = new Lenis({ duration: 1.0, smoothWheel: true });
-      function raf(time: number) {
-        lenis.raf(time);
-        requestAnimationFrame(raf);
-      }
-      requestAnimationFrame(raf);
+
+      const smoothScrollQuery = window.matchMedia("(hover: hover) and (pointer: fine)");
+      const reducedMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+      let lenis: Lenis | null = null;
+
+      const enableSmoothScroll = () => {
+        if (smoothScrollQuery.matches && !reducedMotionQuery.matches) {
+          lenis = new Lenis({
+            autoRaf: true,
+            anchors: true,
+            lerp: 0.28,
+            smoothWheel: true,
+            syncTouch: false,
+            wheelMultiplier: 1,
+            overscroll: false,
+            stopInertiaOnNavigate: true,
+          });
+          document.documentElement.setAttribute("data-smooth-scroll", "");
+        }
+      };
+
+      const disableSmoothScroll = () => {
+        if (lenis) {
+          lenis.destroy();
+          lenis = null;
+        }
+        document.documentElement.removeAttribute("data-smooth-scroll");
+      };
+
+      smoothScrollQuery.addEventListener("change", (e) => {
+        e.matches ? enableSmoothScroll() : disableSmoothScroll();
+      });
+      reducedMotionQuery.addEventListener("change", (e) => {
+        e.matches ? disableSmoothScroll() : enableSmoothScroll();
+      });
+      window.addEventListener("pagehide", disableSmoothScroll, { once: true });
+
+      enableSmoothScroll();
     </script>
 
     <script is:inline>

@@ -20,11 +20,11 @@ const ONELINK = "https://wordream.onelink.me/3ffm/yecmia8x";
     <!-- ============ HERO ============ -->
     <section id="hero" class="landing-hero">
       <div class="hero-copy">
-        <p id="tagline-1" class="eyebrow">Automatic clips. Wordream easy</p>
+        <p id="tagline-1" class="eyebrow">Automatic clips. In a word, easy</p>
         <h1 id="hero-title" class="hero-title" aria-label="Wordream">
           <span>Word</span><span>ream</span>
         </h1>
-        <div class="hero-intro">
+        <div id="tagline-2" class="hero-intro">
           <p>
             Describe your idea<br />
             Get a finished video in minutes
@@ -107,7 +107,7 @@ const ONELINK = "https://wordream.onelink.me/3ffm/yecmia8x";
         <h2 id="value-title">
           Stop editing.<br /><span>Start creating</span>
         </h2>
-        <div class="manifesto-copy">
+        <div class="manifesto-copy" id="value-subtitle">
           <p>
             Wordream turns a plain-language idea—and any media you add—into a polished, ready-to-share video
           </p>
@@ -285,61 +285,139 @@ const ONELINK = "https://wordream.onelink.me/3ffm/yecmia8x";
     }
   </style>
 
-  <script is:inline>
-    // ===== Showcase 轮播（原生 JS 复刻 GSAP 效果）=====
-    (() => {
+  <script>
+    // ===== Showcase 轮播 + GSAP 动效（一比一复刻原作 reelful.app）=====
+    import gsap from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    // ----- Showcase（原作逻辑：初始中间项 / 点激活切静音 / 触摸滑动 / 预 seek 首帧 / aria 同步）-----
+    const initShowcase = () => {
       const showcase = document.querySelector("[data-showcase]");
       if (!showcase) return;
       const items = Array.from(showcase.querySelectorAll("[data-showcase-item]"));
-      if (!items.length) return;
+      const videos = items.map((it) => it.querySelector("[data-showcase-video]"));
+      if (items.length === 0) return;
 
-      let active = 0;
-      const classes = ["is-active", "is-left", "is-right", "is-hidden"];
-
-      const layout = () => {
-        items.forEach((item, i) => {
-          item.classList.remove(...classes);
-          if (i === active) item.classList.add("is-active");
-          else if (i === (active + 1) % items.length) item.classList.add("is-right");
-          else if (i === (active - 1 + items.length) % items.length) item.classList.add("is-left");
-          else item.classList.add("is-hidden");
-        });
-      };
-
-      items.forEach((item, i) => {
-        item.addEventListener("click", () => {
-          if (i === active) return;
-          active = i;
-          layout();
-        });
+      // 预加载首帧：seek 到 min(0.05, duration-0.01) 触发首帧解码
+      videos.forEach((v) => {
+        if (!v) return;
+        const seek = () => {
+          try { v.currentTime = Math.min(0.05, (v.duration || 1) - 0.01); } catch {}
+        };
+        v.readyState >= 1 ? seek() : v.addEventListener("loadedmetadata", seek, { once: true });
       });
 
-      layout();
-    })();
+      const count = items.length;
+      let active = Math.floor(count / 2); // 初始激活中间项
+      let soundOn = false;
+      let touchMoved = false;
 
-    // ===== 视频自动播放（仅激活项播放，节省资源）=====
-    (() => {
-      const items = Array.from(document.querySelectorAll("[data-showcase-item]"));
-      if (!items.length) return;
-      const videos = items.map((it) => it.querySelector("[data-showcase-video]"));
-      let active = 0;
-
-      const sync = () => {
+      const render = () => {
+        items.forEach((item, i) => {
+          const rel = ((i - active) % count + count) % count;
+          item.classList.remove("is-active", "is-left", "is-right", "is-hidden");
+          if (rel === 0) item.classList.add("is-active");
+          else if (rel === 1) item.classList.add("is-right");
+          else if (rel === count - 1) item.classList.add("is-left");
+          else item.classList.add("is-hidden");
+          item.setAttribute("aria-label", i === active ? `${soundOn ? "Mute" : "Unmute"} reel ${i + 1}` : `Focus reel ${i + 1}`);
+          item.setAttribute("aria-pressed", String(i === active && soundOn));
+        });
         videos.forEach((v, i) => {
           if (!v) return;
-          if (i === active) {
-            const p = v.play();
-            if (p) p.catch(() => {});
-          } else {
-            v.pause();
-            v.currentTime = 0;
-          }
+          const isActive = i === active;
+          v.muted = !(soundOn && isActive);
+          isActive ? v.play?.().catch(() => {}) : v.pause?.();
         });
       };
 
-      items.forEach((item, i) => item.addEventListener("click", () => { active = i; sync(); }));
-      sync();
-    })();
+      const goTo = (i) => { active = ((i % count) + count) % count; render(); };
+      const step = (d) => goTo(active + d);
+      const toggleMute = () => { soundOn = !soundOn; render(); };
+
+      items.forEach((item, i) =>
+        item.addEventListener("click", () => { if (!touchMoved) (i === active ? toggleMute() : goTo(i)); })
+      );
+
+      // 触摸滑动：水平位移 > 40px 且大于垂直位移时切换，并抑制后续 click
+      let startX = 0, startY = 0;
+      showcase.addEventListener("touchstart", (e) => {
+        const t = e.changedTouches[0];
+        startX = t.clientX; startY = t.clientY; touchMoved = false;
+      }, { passive: true });
+      showcase.addEventListener("touchend", (e) => {
+        const t = e.changedTouches[0];
+        const dx = t.clientX - startX, dy = t.clientY - startY;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+          touchMoved = true;
+          step(dx < 0 ? 1 : -1);
+        }
+      }, { passive: true });
+
+      render();
+    };
+
+    // ----- GSAP 动效（参数照搬原作 bundle）-----
+    const initMotion = () => {
+      initShowcase();
+
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        document.documentElement.classList.add("reduced-motion");
+        return;
+      }
+
+      // Hero 入场时间线
+      gsap.timeline({ defaults: { ease: "power3.out" }, delay: 0.12 })
+        .from("#tagline-1", { opacity: 0, y: 30, duration: 0.7 })
+        .from("#hero-title", { opacity: 0, y: 60, duration: 1 }, "-=0.4")
+        .from("#tagline-2", { opacity: 0, y: 30, duration: 0.7 }, "-=0.55")
+        .from(".hero-showcase", { opacity: 0, y: 40, duration: 0.9 }, "-=0.7");
+
+      // Hero 滚动视差
+      gsap.to("#hero > div", {
+        yPercent: -5,
+        ease: "none",
+        scrollTrigger: { trigger: "#hero", start: "55% center", end: "bottom top", scrub: true },
+      });
+
+      // value-prop reveal（once）
+      gsap.from(["#value-title", "#value-subtitle"], {
+        opacity: 0, y: 45, duration: 0.9, stagger: 0.12, ease: "power3.out",
+        scrollTrigger: { trigger: "#value-prop", start: "top 70%", once: true },
+      });
+
+      // step-item 逐项入场（once）：序号左滑 + 标题/段落上移
+      gsap.utils.toArray(".step-item").forEach((el) => {
+        const number = el.querySelector(".step-number");
+        const texts = el.querySelectorAll(".step-title, .step-title + p");
+        gsap.timeline({ scrollTrigger: { trigger: el, start: "top 78%", once: true } })
+          .from(number, { opacity: 0, x: -32, duration: 0.65, ease: "power3.out" })
+          .from(texts, { opacity: 0, y: 24, duration: 0.65, stagger: 0.08, ease: "power3.out" }, "-=0.4");
+      });
+
+      // 磁性按钮（仅精确指针设备）
+      if (window.matchMedia("(pointer: fine)").matches) {
+        document.querySelectorAll(".btn-primary").forEach((btn) => {
+          btn.addEventListener("pointermove", (e) => {
+            const rect = btn.getBoundingClientRect();
+            gsap.to(btn, {
+              x: (e.clientX - rect.left - rect.width / 2) * 0.12,
+              y: (e.clientY - rect.top - rect.height / 2) * 0.12,
+              duration: 0.35, ease: "power2.out",
+            });
+          });
+          btn.addEventListener("pointerleave", () => {
+            gsap.to(btn, { x: 0, y: 0, duration: 0.55, ease: "elastic.out(1, 0.45)" });
+          });
+        });
+      }
+    };
+
+    document.readyState === "loading"
+      ? document.addEventListener("DOMContentLoaded", initMotion, { once: true })
+      : initMotion();
   </script>
 
   <script type="application/ld+json" is:set:html={JSON.stringify({
@@ -349,10 +427,15 @@ const ONELINK = "https://wordream.onelink.me/3ffm/yecmia8x";
     "applicationCategory": "MultimediaApplication",
     "operatingSystem": "iOS",
     "description": "Describe a video in plain words, add optional media, and let Wordream generate the edit, motion, text, music, voiceover, and captions. Refine it by chat or in the editor.",
-    "offers": [
-      { "@type": "Offer", "name": "Creator", "price": "24.99", "priceCurrency": "USD", "description": "3,000 credits per month" },
-      { "@type": "Offer", "name": "Pro", "price": "49.99", "priceCurrency": "USD", "description": "7,500 credits per month" },
-      { "@type": "Offer", "name": "Studio", "price": "99.99", "priceCurrency": "USD", "description": "18,000 credits per month" }
+    "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+    "featureList": [
+      "Automatic clips from plain-language prompts",
+      "AI voiceover and narration",
+      "Auto captions",
+      "Music selection",
+      "Chat-based editing",
+      "Timeline fine-tuning",
+      "Export and share"
     ],
     "url": "https://wordream.com",
     "publisher": {
