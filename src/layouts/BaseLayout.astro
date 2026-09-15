@@ -1,0 +1,118 @@
+---
+// Wordream — Base Layout
+// 包含站点头部（品牌 + 导航 + CTA）、全局字体、脚本、grain 覆盖层
+interface Props {
+  title?: string;
+  description?: string;
+  /** 深色页（如首页 hero 顶部导航文字为白色）*/
+  darkNav?: boolean;
+  /** 是否为 landing 页（home），有完整 header */
+  landing?: boolean;
+}
+
+const {
+  title = "Wordream — Prompt-to-Video AI Creator for iPhone",
+  description = "Describe a video in plain words, add optional media, and let Wordream generate the edit, motion, text, music, voiceover, and captions. Refine it by chat or in the editor.",
+  darkNav = true,
+  landing = false,
+} = Astro.props;
+
+// CTA 链接：App Store 占位（上架后替换真实 URL）
+const APP_STORE_PLACEHOLDER = "https://apps.apple.com/app/wordream";
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#FB613B" />
+    <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="prompt to video, AI video generator, AI video creator, chat video editor, automatic video editing, Instagram Reels creator, TikTok video generator, social media video creator"
+    />
+    <link rel="canonical" href={"https://wordream.com" + Astro.url.pathname} />
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/reel-icon-32.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="/assets/reel-icon-64.png" />
+    <link rel="shortcut icon" href="/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/reel-icon-180.png" />
+    <link rel="preload" href="/assets/fonts/PPNeueMontreal-Medium.otf" as="font" type="font/otf" crossorigin />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Wordream" />
+    <meta property="og:title" content={title ?? "Wordream — Prompt-to-Video AI Creator for iPhone"} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={"https://wordream.com" + Astro.url.pathname} />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <title>{title ?? "Wordream — Prompt-to-Video AI Creator for iPhone"}</title>
+
+    <link rel="stylesheet" href="/src/styles/global.css" is:inline />
+  </head>
+
+  <body class={landing ? "grain" : ""}>
+    <!-- 品牌锁定（左上角 logo） -->
+    <a
+      href="/"
+      class="brand-lockup z-[100] block absolute top-[2.5vh] left-[5.09vw] md:top-[3.1vh] md:left-[2.18vw] lg:left-[3.27vw]"
+      aria-label="Wordream home"
+    >
+      <img
+        src="/assets/wordream-mark.svg"
+        alt=""
+        width="438"
+        height="145"
+        class={`brand-art h-auto w-16 md:w-20 ${darkNav ? "brand-art--white" : "subpage-logo"}`}
+      />
+    </a>
+    <header
+      id="header"
+      class="absolute top-0 right-0 left-0 z-40 flex items-center justify-end gap-[5.09vw] px-[5.09vw] pt-[2.5vh] pb-[1.88vh] md:gap-[2.18vw] md:px-[2.18vw] md:pt-[3.1vh] md:pb-[2.41vh] lg:px-[3.27vw]"
+    >
+      <nav
+        aria-label="Legal and contact"
+        class="hidden items-center gap-[5.09vw] text-base font-normal md:flex md:gap-[2.18vw] md:text-[clamp(1.125rem,1.35vw,1.5rem)]"
+      >
+        <a href="/compare" class={`transition-opacity duration-200 hover:opacity-70 ${darkNav ? "text-white" : "text-ink"}`}>Compare</a>
+        <a href="/terms" class={`transition-opacity duration-200 hover:opacity-70 ${darkNav ? "text-white" : "text-ink"}`}>Terms</a>
+        <a href="/privacy" class={`transition-opacity duration-200 hover:opacity-70 ${darkNav ? "text-white" : "text-ink"}`}>Privacy</a>
+        <a href="/contact" class={`transition-opacity duration-200 hover:opacity-70 ${darkNav ? "text-white" : "text-ink"}`}>Contact</a>
+      </nav>
+      <div class="hidden md:block">
+        <a
+          href={APP_STORE_PLACEHOLDER}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Download Wordream on the App Store"
+          data-app-store-cta
+          class="inline-flex items-center gap-2 whitespace-nowrap rounded-full bg-ember px-6 py-3 text-base font-medium tracking-[-0.01em] text-white no-underline transition-transform duration-200 hover:-translate-y-0.5 md:px-8"
+        >
+          <span>Download for iPhone</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </header>
+
+    <slot />
+
+    <footer class="relative z-10 px-[5.09vw] py-[2.89vh] md:px-[2.18vw] lg:px-[3.27vw]">
+      <div class="relative">
+        <nav aria-label="Footer" class="flex items-center gap-[5.09vw] text-base text-ink md:gap-[1.36vw]">
+          <a href="/compare" class="transition-colors duration-200 hover:text-ember">Compare</a>
+          <a href="/terms" class="transition-colors duration-200 hover:text-ember">Terms</a>
+          <a href="/privacy" class="transition-colors duration-200 hover:text-ember">Privacy</a>
+          <a href="/contact" class="transition-colors duration-200 hover:text-ember">Contact</a>
+        </nav>
+      </div>
+    </footer>
+
+    <style is:inline>
+      .brand-lockup { text-decoration: none; }
+      .brand-art--white { filter: brightness(0) invert(); }
+      .subpage-logo { filter: none; }
+    </style>
+
+    <div class="site-scrollbar" aria-hidden="true" hidden></div>
+  </body>
+</html>

@@ -1,0 +1,54 @@
+---
+// Wordream — Compare (对比页)
+import Layout from "../layouts/BaseLayout.astro";
+
+const comparisons = [
+  {
+    title: "Wordream vs. CapCut",
+    desc: "CapCut hands you a powerful editor and you do the editing. Wordream does the editing for you — on your phone, narrated in your voice — with a built-in editor for tweaks",
+  },
+  {
+    title: "Wordream vs. Edits (by Instagram)",
+    desc: "Edits is Meta's free, manual mobile editor built around Instagram. Wordream is also mobile, but it's automatic — it writes, narrates, and assembles for you, then lets you adjust.",
+  },
+  {
+    title: "Wordream vs. Captions",
+    desc: "Captions applies AI edit templates to a single clip — mostly speak-to-camera. Wordream assembles up to 20 arbitrary clips per project from your instructions, with real or cloned voice.",
+  },
+  {
+    title: "Wordream vs. video-editing MCPs",
+    desc: "MCP editors are powerful desktop tools for technical users — install a desktop AI client, connect over MCP, move your footage across, then edit by chat. Wordream needs none of that: it is a phone app.",
+  },
+];
+---
+
+<Layout
+  title="Wordream compared — CapCut, Edits, Captions & AI editors"
+  description="Honest, side-by-side comparisons of Wordream against CapCut, Instagram Edits, Captions, and desktop AI (MCP) video editors. See which tool fits how you make videos."
+  darkNav={false}
+>
+  <main class="compare-page">
+    <div class="compare-shell">
+      <header class="compare-hub-head">
+        <p class="section-index">Compare</p>
+        <h1>Wordream, <span>compared</span></h1>
+        <p>
+          Honest, side-by-side looks at how Wordream stacks up against other video editing tools. Every rival here is a
+          good product — we say plainly where each one wins.
+        </p>
+      </header>
+
+      <div class="compare-hub-grid">
+        {comparisons.map((c) => (
+          <a class="compare-hub-card" href="#">
+            <h2>{c.title}</h2>
+            <p>{c.desc}</p>
+            <span class="compare-hub-arrow" aria-hidden="true">↗</span>
+          </a>
+        ))}
+      </div>
+
+      <a href="/" class="compare-back"><span aria-hidden="true">←</span> Home</a>
+    </div>
+  </main>
+</Layout>

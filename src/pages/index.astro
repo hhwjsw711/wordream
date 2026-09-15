@@ -1,0 +1,344 @@
+---
+// Wordream — Home (一比一复刻 reelful.app 新版首页)
+import Layout from "../layouts/BaseLayout.astro";
+
+const APP_STORE = "https://apps.apple.com/app/wordream";
+const ONELINK = "https://wordream.onelink.me/3ffm/yecmia8x";
+---
+
+<Layout landing>
+  <!-- 品牌锁定（左上角 logo） -->
+  <a
+    href="/"
+    class="brand-lockup z-[100] block absolute top-[2.5vh] left-[5.09vw] md:top-[3.1vh] md:left-[2.18vw] lg:left-[3.27vw]"
+    aria-label="Wordream home"
+  >
+    <img src="/assets/wordream-mark.svg" alt="" width="438" height="145" class="brand-art h-auto w-16 md:w-20 brand-art--white" />
+  </a>
+
+  <main class="relative z-10 overflow-hidden">
+    <!-- ============ HERO ============ -->
+    <section id="hero" class="landing-hero">
+      <div class="hero-copy">
+        <p id="tagline-1" class="eyebrow">Automatic clips. Wordream easy</p>
+        <h1 id="hero-title" class="hero-title" aria-label="Wordream">
+          <span>Word</span><span>ream</span>
+        </h1>
+        <div class="hero-intro">
+          <p>
+            Describe your idea<br />
+            Get a finished video in minutes
+          </p>
+          <a id="hero-cta" class="btn-primary btn-dark" href={APP_STORE} target="_blank" rel="noopener noreferrer" data-app-store-cta>
+            Download for iPhone
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-showcase" data-showcase aria-label="Videos made with Wordream">
+        <div class="showcase-track">
+          <button class="showcase-item" type="button" data-showcase-item aria-label="Focus reel 1">
+            <span class="showcase-frame">
+              <video class="showcase-video" data-showcase-video muted loop playsinline preload="metadata">
+                <source src="/assets/hero-reel-1.mp4" type="video/mp4" />
+              </video>
+              <span class="showcase-ph" aria-hidden="true">
+                <svg class="showcase-ph-icon" viewBox="0 0 24 24" fill="none">
+                  <path d="M8 5.5v13l11-6.5-11-6.5Z" fill="currentColor"></path>
+                </svg>
+                <span class="showcase-ph-label">Reel 01</span>
+                <span class="showcase-ph-hint">Add your video</span>
+              </span>
+            </span>
+          </button>
+          <button class="showcase-item" type="button" data-showcase-item aria-label="Focus reel 2">
+            <span class="showcase-frame">
+              <video class="showcase-video" data-showcase-video muted loop playsinline preload="metadata">
+                <source src="/assets/hero-reel-2.mp4" type="video/mp4" />
+              </video>
+              <span class="showcase-ph" aria-hidden="true">
+                <svg class="showcase-ph-icon" viewBox="0 0 24 24" fill="none">
+                  <path d="M8 5.5v13l11-6.5-11-6.5Z" fill="currentColor"></path>
+                </svg>
+                <span class="showcase-ph-label">Reel 02</span>
+                <span class="showcase-ph-hint">Add your video</span>
+              </span>
+            </span>
+          </button>
+          <button class="showcase-item" type="button" data-showcase-item aria-label="Focus reel 3">
+            <span class="showcase-frame">
+              <video class="showcase-video" data-showcase-video muted loop playsinline preload="metadata">
+                <source src="/assets/hero-reel-3.mp4" type="video/mp4" />
+              </video>
+              <span class="showcase-ph" aria-hidden="true">
+                <svg class="showcase-ph-icon" viewBox="0 0 24 24" fill="none">
+                  <path d="M8 5.5v13l11-6.5-11-6.5Z" fill="currentColor"></path>
+                </svg>
+                <span class="showcase-ph-label">Reel 03</span>
+                <span class="showcase-ph-hint">Add your video</span>
+              </span>
+            </span>
+          </button>
+        </div>
+      </div>
+
+      <a
+        class="hero-backer"
+        href="https://speedrun.a16z.com/"
+        target="_blank"
+        rel="noopener noreferrer"
+        aria-label="Backed by a16z Speedrun"
+      >
+        <span>Backed by</span>
+        <img src="/assets/a16z-speedrun.svg" alt="" width="203" height="28" />
+      </a>
+
+      <div class="hero-index" aria-hidden="true">
+        <span>AI video creation</span>
+        <span>Voice · Edit · Music · Captions</span>
+      </div>
+    </section>
+
+    <!-- ============ 01 / WHY ============ -->
+    <section id="value-prop" class="manifesto-section">
+      <p class="section-index">01 / Why Wordream</p>
+      <div class="manifesto-grid">
+        <h2 id="value-title">
+          Stop editing.<br /><span>Start creating</span>
+        </h2>
+        <div class="manifesto-copy">
+          <p>
+            Wordream turns a plain-language idea—and any media you add—into a polished, ready-to-share video
+          </p>
+          <p class="manifesto-note">No prompt engineering. No blank canvas. No editing marathon</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 02 / HOW IT WORKS ============ -->
+    <section id="steps" class="story-section">
+      <div class="story-heading">
+        <p class="section-index section-index--light">02 / How it works</p>
+        <h2>
+          Four moves.<br /><span>One finished story</span>
+        </h2>
+        <p>Everything that normally slows you down happens behind the scenes</p>
+      </div>
+
+      <ol id="steps-container" class="story-grid">
+        <li class="step-item story-card story-card--orange">
+          <div class="story-card-top"><span class="step-number">01</span></div>
+          <img
+            class="story-phone"
+            src="/assets/workflow-add-moments.svg"
+            alt="Wordream app screen for describe your idea"
+            width="375"
+            height="607"
+            loading="lazy"
+            decoding="async"
+          />
+          <div>
+            <h3 class="step-title">Describe your idea</h3>
+            <p>Start with a prompt. Add photos and videos you want Wordream to use</p>
+          </div>
+        </li>
+        <li class="step-item story-card story-card--pink">
+          <div class="story-card-top"><span class="step-number">02</span></div>
+          <img
+            class="story-phone"
+            src="/assets/workflow-tell-the-point.svg"
+            alt="Wordream app screen for shape the plan"
+            width="375"
+            height="607"
+            loading="lazy"
+            decoding="async"
+          />
+          <div>
+            <h3 class="step-title">Shape the plan</h3>
+            <p>Wordream drafts the structure and script. Reply with changes until the idea feels right</p>
+          </div>
+        </li>
+        <li class="step-item story-card story-card--paper">
+          <div class="story-card-top"><span class="step-number">03</span></div>
+          <img
+            class="story-phone"
+            src="/assets/workflow-sound-like-yourself.svg"
+            alt="Wordream app screen for preview the video"
+            width="375"
+            height="607"
+            loading="lazy"
+            decoding="async"
+          />
+          <div>
+            <h3 class="step-title">Preview the video</h3>
+            <p>Wordream builds the edit, motion, text, music and voiceover into a ready-to-share video</p>
+          </div>
+        </li>
+        <li class="step-item story-card story-card--liquid">
+          <div class="story-card-top"><span class="step-number">04</span></div>
+          <img
+            class="story-phone"
+            src="/assets/workflow-post-the-clip.svg"
+            alt="Wordream app screen for refine and export"
+            width="375"
+            height="607"
+            loading="lazy"
+            decoding="async"
+          />
+          <div>
+            <h3 class="step-title">Refine and export</h3>
+            <p>Ask for changes in chat or fine-tune the timeline, then export the finished video</p>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <!-- ============ 03 / PLANS ============ -->
+    <section id="pricing" class="pricing-section">
+      <div class="pricing-heading">
+        <p class="section-index">03 / Plans</p>
+        <h2>
+          More ideas<br /><span
+            >More ways<br />
+            to create</span
+          >
+        </h2>
+        <p>Creator, Pro and Studio plans, plus custom Enterprise options for teams. Subscriptions are managed through the App Store</p>
+      </div>
+
+      <div class="plan-grid">
+        <article class="plan-card">
+          <div>
+            <p class="plan-eyebrow">For getting started</p>
+            <h3>Creator</h3>
+            <p class="plan-price"><strong>$24.99</strong> <span>/ month</span></p>
+            <p class="plan-allowance">3,000 credits · about 10 videos</p>
+            <p class="plan-detail">Narration, editing, music and captions for your creative habit</p>
+          </div>
+          <a class="btn-primary btn-dark" href={APP_STORE} target="_blank" rel="noopener noreferrer" data-app-store-cta>
+            Get the app<span aria-hidden="true">↗</span>
+          </a>
+        </article>
+
+        <article class="plan-card plan-card--featured">
+          <div>
+            <p class="plan-eyebrow">For regular creators</p>
+            <h3>Pro</h3>
+            <p class="plan-price"><strong>$49.99</strong> <span>/ month</span></p>
+            <p class="plan-allowance">7,500 credits · about 25 videos</p>
+            <p class="plan-detail">More room to publish consistently, with a better rate per credit</p>
+          </div>
+          <a class="btn-primary btn-light" href={APP_STORE} target="_blank" rel="noopener noreferrer" data-app-store-cta>
+            Get the app<span aria-hidden="true">↗</span>
+          </a>
+        </article>
+
+        <article class="plan-card">
+          <div>
+            <p class="plan-eyebrow">Best value</p>
+            <h3>Studio</h3>
+            <p class="plan-price"><strong>$99.99</strong> <span>/ month</span></p>
+            <p class="plan-allowance">18,000 credits · about 60 videos</p>
+            <p class="plan-detail">The best credit value for high-output creators and production workflows</p>
+          </div>
+          <a class="btn-primary btn-dark" href={APP_STORE} target="_blank" rel="noopener noreferrer" data-app-store-cta>
+            Get the app<span aria-hidden="true">↗</span>
+          </a>
+        </article>
+
+        <article class="plan-card">
+          <div>
+            <p class="plan-eyebrow">Work at scale</p>
+            <h3>Enterprise</h3>
+            <p class="plan-price"><strong>Custom</strong> <span></span></p>
+            <p class="plan-allowance">Volume and billing for your team</p>
+            <p class="plan-detail">We will tailor a plan to how your organization uses Wordream at scale</p>
+          </div>
+          <a class="btn-primary btn-dark" href="mailto:hello@wordream.app"> Talk to us<span aria-hidden="true">↗</span> </a>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============ 04 / CTA ============ -->
+    <section id="cta" class="cta-section">
+      <div class="cta-liquid" aria-hidden="true"></div>
+      <div class="cta-content">
+        <p class="section-index section-index--light">04 / Your turn</p>
+        <h2 id="cta-title">
+          Your stories<br />deserve to be <span>seen</span>
+        </h2>
+        <a id="cta-btn" class="btn-primary btn-dark" href={APP_STORE} target="_blank" rel="noopener noreferrer" data-app-store-cta>
+          Download Wordream <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+      <img class="brand-glyph brand-glyph--cta" src="/assets/wordream-mark.svg" alt="" aria-hidden="true" />
+    </section>
+  </main>
+
+  <style is:inline>
+    .brand-art--white {
+      filter: brightness(0) invert();
+    }
+    .brand-lockup {
+      text-decoration: none;
+    }
+  </style>
+
+  <script is:inline>
+    // ===== Showcase 轮播（原生 JS 复刻 GSAP 效果）=====
+    (() => {
+      const showcase = document.querySelector("[data-showcase]");
+      if (!showcase) return;
+      const items = Array.from(showcase.querySelectorAll("[data-showcase-item]"));
+      if (!items.length) return;
+
+      let active = 0;
+      const classes = ["is-active", "is-left", "is-right", "is-hidden"];
+
+      const layout = () => {
+        items.forEach((item, i) => {
+          item.classList.remove(...classes);
+          if (i === active) item.classList.add("is-active");
+          else if (i === (active + 1) % items.length) item.classList.add("is-right");
+          else if (i === (active - 1 + items.length) % items.length) item.classList.add("is-left");
+          else item.classList.add("is-hidden");
+        });
+      };
+
+      items.forEach((item, i) => {
+        item.addEventListener("click", () => {
+          if (i === active) return;
+          active = i;
+          layout();
+        });
+      });
+
+      layout();
+    })();
+
+    // ===== 视频自动播放（仅激活项播放，节省资源）=====
+    (() => {
+      const items = Array.from(document.querySelectorAll("[data-showcase-item]"));
+      if (!items.length) return;
+      const videos = items.map((it) => it.querySelector("[data-showcase-video]"));
+      let active = 0;
+
+      const sync = () => {
+        videos.forEach((v, i) => {
+          if (!v) return;
+          if (i === active) {
+            const p = v.play();
+            if (p) p.catch(() => {});
+          } else {
+            v.pause();
+            v.currentTime = 0;
+          }
+        });
+      };
+
+      items.forEach((item, i) => item.addEventListener("click", () => { active = i; sync(); }));
+      sync();
+    })();
+  </script>
+</Layout>

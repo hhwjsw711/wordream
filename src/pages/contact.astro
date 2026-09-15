@@ -1,0 +1,86 @@
+---
+// Wordream — Contact (联系页)
+import Layout from "../layouts/BaseLayout.astro";
+
+const EMAIL = "support@wordream.app";
+---
+
+<Layout
+  title="Contact — Wordream"
+  description="Get in touch with the Wordream team. We'd love to hear from you"
+  darkNav={false}
+>
+  <main class="utility-page">
+    <section class="utility-shell contact-stage" aria-labelledby="contact-title">
+      <div class="contact-topline">
+        <p>Questions · Feedback · Support</p>
+        <p>Direct to the Wordream team</p>
+      </div>
+
+      <div class="contact-copy">
+        <h1 id="contact-title">Talk to us!</h1>
+        <p>Tell us what you are making, what is not working, or what Wordream should do next</p>
+      </div>
+
+      <div class="contact-email">
+        <span class="contact-email-label">Email the team</span>
+        <div class="contact-email-value">
+          <a class="contact-email-link" href={`mailto:${EMAIL}`}>{EMAIL}</a>
+          <button class="contact-copy-button" type="button" data-copy-email={EMAIL} aria-label={`Copy ${EMAIL}`}>
+            <svg class="contact-copy-icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <rect x="8" y="8" width="11" height="11" rx="2" stroke="currentColor" stroke-width="1.8"></rect>
+              <path
+                d="M16 8V7a2 2 0 0 0-2-2H7a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h1"
+                stroke="currentColor"
+                stroke-width="1.8"></path>
+            </svg>
+            <svg class="contact-copy-check" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path
+                d="m6 12.5 4 4L18.5 8"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+          </button>
+        </div>
+        <span class="sr-only" data-copy-status aria-live="polite"></span>
+      </div>
+
+      <div class="contact-footline">
+        <a href="/"><span aria-hidden="true">←</span> Home</a>
+        <p>We read every message.</p>
+      </div>
+    </section>
+  </main>
+
+  <script is:inline>
+    (() => {
+      const btn = document.querySelector("[data-copy-email]");
+      if (!btn) return;
+      const status = document.querySelector("[data-copy-status]");
+      let timer;
+      btn.addEventListener("click", async () => {
+        const email = btn.dataset.copyEmail;
+        if (!email) return;
+        clearTimeout(timer);
+        try {
+          await navigator.clipboard.writeText(email);
+          btn.classList.remove("is-error");
+          btn.classList.add("is-copied");
+          btn.setAttribute("aria-label", `${email} copied`);
+          if (status) status.textContent = `${email} copied`;
+        } catch {
+          btn.classList.remove("is-copied");
+          btn.classList.add("is-error");
+          btn.setAttribute("aria-label", `Try copying ${email} again`);
+          if (status) status.textContent = "Could not copy the email address";
+        }
+        timer = setTimeout(() => {
+          btn.classList.remove("is-copied", "is-error");
+          btn.setAttribute("aria-label", `Copy ${email}`);
+        }, 2000);
+      });
+    })();
+  </script>
+</Layout>
