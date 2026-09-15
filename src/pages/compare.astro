@@ -29,6 +29,7 @@ const comparisons = [
 <Layout
   title="Wordream compared — CapCut, Edits, Captions & AI editors"
   description="Honest, side-by-side comparisons of Wordream against CapCut, Instagram Edits, Captions, and desktop AI (MCP) video editors. See which tool fits how you make videos."
+  keywords="Wordream vs CapCut, Wordream vs Captions, Wordream vs Edits, AI video editor comparison, best AI video tool, prompt-to-video alternatives"
   darkNav={false}
 >
   <main class="compare-page">
@@ -55,4 +56,22 @@ const comparisons = [
       <a href="/" class="compare-back"><span aria-hidden="true">←</span> Home</a>
     </div>
   </main>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Wordream compared — CapCut, Edits, Captions & AI editors",
+    "description": "Honest, side-by-side comparisons of Wordream against CapCut, Instagram Edits, Captions, and desktop AI (MCP) video editors.",
+    "url": "https://wordream.com/compare",
+    "isPartOf": { "@type": "WebSite", "name": "Wordream", "url": "https://wordream.com" },
+    "mainEntity": {
+      "@type": "ItemList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Wordream vs. CapCut", "url": "https://wordream.com/compare/reelful-vs-capcut" },
+        { "@type": "ListItem", "position": 2, "name": "Wordream vs. Edits (by Instagram)", "url": "https://wordream.com/compare/reelful-vs-edits" },
+        { "@type": "ListItem", "position": 3, "name": "Wordream vs. Captions", "url": "https://wordream.com/compare/reelful-vs-captions" },
+        { "@type": "ListItem", "position": 4, "name": "Wordream vs. video-editing MCPs", "url": "https://wordream.com/compare/reelful-vs-mcp-editors" }
+      ]
+    }
+  })} />
 </Layout>

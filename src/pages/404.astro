@@ -1,0 +1,36 @@
+---
+// Wordream — 404
+import Layout from "../layouts/BaseLayout.astro";
+---
+
+<Layout
+  title="Page not found — Wordream"
+  description="The page you were looking for could not be found"
+  darkNav={false}
+>
+  <main class="utility-page">
+    <section class="utility-shell">
+      <div class="contact-topline">
+        <p>404</p>
+        <p>Page not found</p>
+      </div>
+
+      <div class="contact-copy">
+        <h1>Lost the thread</h1>
+        <p>The page you were looking for moved, or never existed. Let's get you back on track.</p>
+      </div>
+
+      <div class="contact-email">
+        <a href="/" class="btn-primary btn-dark">
+          <span>Back to home</span>
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+
+      <div class="contact-footline">
+        <a href="/compare"><span aria-hidden="true">←</span> Compare</a>
+        <a href="/contact">Contact us</a>
+      </div>
+    </section>
+  </main>
+</Layout>

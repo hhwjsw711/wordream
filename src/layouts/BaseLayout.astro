@@ -6,6 +6,14 @@ import "../styles/global.css";
 interface Props {
   title?: string;
   description?: string;
+  /** Twitter card title（默认用 title）*/
+  twitterTitle?: string;
+  /** Twitter card description（默认用 description）*/
+  twitterDescription?: string;
+  /** 页面级 keywords（默认用通用 keywords）*/
+  keywords?: string;
+  /** 页面级 meta robots */
+  robots?: string;
   /** 深色页（如首页 hero 顶部导航文字为白色）*/
   darkNav?: boolean;
   /** 是否为 landing 页（home），有完整 header */
@@ -15,6 +23,10 @@ interface Props {
 const {
   title = "Wordream — Prompt-to-Video AI Creator for iPhone",
   description = "Describe a video in plain words, add optional media, and let Wordream generate the edit, motion, text, music, voiceover, and captions. Refine it by chat or in the editor.",
+  twitterTitle,
+  twitterDescription,
+  keywords = "prompt to video, AI video generator, AI video creator, chat video editor, automatic video editing, Instagram Reels creator, TikTok video generator, social media video creator",
+  robots = "index, follow",
   darkNav = true,
   landing = false,
 } = Astro.props;
@@ -30,9 +42,10 @@ const APP_STORE_PLACEHOLDER = "https://apps.apple.com/app/wordream";
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#FB613B" />
     <meta name="description" content={description} />
+    <meta name="robots" content={robots} />
     <meta
       name="keywords"
-      content="prompt to video, AI video generator, AI video creator, chat video editor, automatic video editing, Instagram Reels creator, TikTok video generator, social media video creator"
+      content={keywords}
     />
     <link rel="canonical" href={"https://wordream.com" + Astro.url.pathname} />
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/reel-icon-32.png" />
@@ -52,6 +65,8 @@ const APP_STORE_PLACEHOLDER = "https://apps.apple.com/app/wordream";
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="Wordream — the prompt-to-video AI creator in your pocket" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={twitterTitle ?? title ?? "Wordream — Prompt-to-Video AI Creator for iPhone"} />
+    <meta name="twitter:description" content={twitterDescription ?? description} />
     <meta name="twitter:image" content="https://wordream.com/assets/og-image-v3.jpg" />
     <meta name="twitter:image:alt" content="Wordream — the prompt-to-video AI creator in your pocket" />
 
@@ -59,6 +74,7 @@ const APP_STORE_PLACEHOLDER = "https://apps.apple.com/app/wordream";
   </head>
 
   <body class={landing ? "grain" : ""}>
+    <a href="#main-content" class="skip-nav">Skip to content</a>
     <!-- 品牌锁定（左上角 logo） -->
     <a
       href="/"
@@ -67,7 +83,7 @@ const APP_STORE_PLACEHOLDER = "https://apps.apple.com/app/wordream";
     >
       <img
         src="/assets/reelful-mark.svg"
-        alt=""
+        alt="Wordream logo"
         width="438"
         height="145"
         class={`brand-art h-auto w-16 md:w-20 ${darkNav ? "brand-art--white" : "subpage-logo"}`}
@@ -101,7 +117,9 @@ const APP_STORE_PLACEHOLDER = "https://apps.apple.com/app/wordream";
       </div>
     </header>
 
-    <slot />
+    <main id="main-content">
+      <slot />
+    </main>
 
     <footer class="relative z-10 px-[5.09vw] py-[2.89vh] md:px-[2.18vw] lg:px-[3.27vw]">
       <div class="relative">
@@ -118,6 +136,8 @@ const APP_STORE_PLACEHOLDER = "https://apps.apple.com/app/wordream";
       .brand-lockup { text-decoration: none; }
       .brand-art--white { filter: brightness(0) invert(); }
       .subpage-logo { filter: none; }
+      .skip-nav { position: absolute; top: -100px; left: 0; z-index: 200; padding: 0.5rem 1rem; background: #FB613B; color: #fff; font-size: 0.875rem; text-decoration: none; border-radius: 0 0 0.5rem 0; transition: top 0.2s; }
+      .skip-nav:focus { top: 0; }
     </style>
 
     <div class="site-scrollbar" aria-hidden="true" hidden></div>

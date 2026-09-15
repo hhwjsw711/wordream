@@ -2,12 +2,14 @@
 // Wordream — Contact (联系页)
 import Layout from "../layouts/BaseLayout.astro";
 
-const EMAIL = "support@wordream.com";
+const EMAIL = "hello@wordream.com";
 ---
 
 <Layout
   title="Contact — Wordream"
   description="Get in touch with the Wordream team. We'd love to hear from you"
+  keywords="contact Wordream, Wordream support, feedback, help, email Wordream team"
+  robots="noindex, follow"
   darkNav={false}
 >
   <main class="utility-page">
@@ -20,6 +22,7 @@ const EMAIL = "support@wordream.com";
       <div class="contact-copy">
         <h1 id="contact-title">Talk to us!</h1>
         <p>Tell us what you are making, what is not working, or what Wordream should do next</p>
+        <h2 class="sr-only">Ways to reach us</h2>
       </div>
 
       <div class="contact-email">
@@ -53,6 +56,21 @@ const EMAIL = "support@wordream.com";
       </div>
     </section>
   </main>
+
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ContactPage",
+    "name": "Contact — Wordream",
+    "description": "Get in touch with the Wordream team",
+    "url": "https://wordream.com/contact",
+    "isPartOf": { "@type": "WebSite", "name": "Wordream", "url": "https://wordream.com" },
+    "mainEntity": {
+      "@type": "Organization",
+      "name": "Wordream",
+      "url": "https://wordream.com",
+      "email": "hello@wordream.com"
+    }
+  })} />
 
   <script is:inline>
     (() => {
