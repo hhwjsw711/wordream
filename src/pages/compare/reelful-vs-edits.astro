@@ -1,0 +1,86 @@
+---
+// Wordream vs. Edits (by Instagram)
+import Layout from "../../layouts/BaseLayout.astro";
+
+const APP_STORE = "https://apps.apple.com/app/wordream";
+
+const rows = [
+  { label: "Editing model", competitor: "Manual multi-track timeline", wordream: "Automatic, with a built-in editor for tweaks" },
+  { label: "Script & voiceover", competitor: "You write & record (teleprompter)", wordream: "Written for you, narrated in your real or cloned voice" },
+  { label: "Captions / music", competitor: "Auto-captions; Instagram audio", wordream: "Auto-captions + generated music, added for you" },
+  { label: "Platform focus", competitor: "Instagram-first", wordream: "Platform-neutral — IG, TikTok, YouTube, LinkedIn, X" },
+  { label: "Price", competitor: "Free, no watermark", wordream: "Free to start with a watermark, then monthly plans" },
+  { label: "Best for", competitor: "Creators who like editing and following IG trends", wordream: "Creators who'd rather not edit at all, but want to post clips anywhere" },
+];
+---
+
+<Layout
+  title="Wordream vs. Edits (by Instagram) — Wordream"
+  description="Edits is Meta's free, manual mobile editor built around Instagram. Wordream is also mobile, but it's automatic — it writes, narrates, and assembles for you, then lets you adjust."
+  darkNav={false}
+>
+  <main class="compare-page">
+    <div class="compare-shell">
+      <article class="compare-article">
+        <header class="compare-lede">
+          <p class="section-index">Wordream vs. Edits (by Instagram)</p>
+          <h1>
+            <span class="compare-title-line">Wordream vs. Edits</span>
+            <span class="compare-title-line">(by Instagram)</span>
+          </h1>
+          <p class="compare-summary">Edits is Meta's free, genuinely good manual mobile editor — built around Instagram. Wordream is also mobile, but it's automatic: it writes, narrates, and assembles for you, then lets you adjust. Both live on your phone — here the difference is automatic vs. do-it-yourself, and platform-neutral vs. Instagram-first.</p>
+        </header>
+
+        <div class="compare-table" role="table" aria-label="Wordream vs. Edits (by Instagram)">
+          <div class="compare-row compare-row--head" role="row">
+            <span class="compare-cell compare-cell--label" role="columnheader"></span>
+            <span class="compare-cell compare-cell--competitor" role="columnheader">Edits</span>
+            <span class="compare-cell compare-cell--reelful" role="columnheader">Wordream</span>
+          </div>
+          {rows.map((r) => (
+            <div class="compare-row" role="row">
+              <span class="compare-cell compare-cell--label" role="rowheader">{r.label}</span>
+              <span class="compare-cell compare-cell--competitor" role="cell">
+                <span class="compare-cell-tag" aria-hidden="true">Edits</span>
+                {r.competitor}
+              </span>
+              <span class="compare-cell compare-cell--reelful" role="cell">
+                <span class="compare-cell-tag" aria-hidden="true">Wordream</span>
+                {r.wordream}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div class="compare-verdict">
+          <p class="compare-verdict-item">
+            <strong>Choose Edits (by Instagram) if</strong> you enjoy editing by hand and live inside Instagram's ecosystem
+          </p>
+          <p class="compare-verdict-item">
+            <strong>Choose Wordream if</strong> you want the clip made for you and posted anywhere
+          </p>
+        </div>
+
+        <div class="compare-cta">
+          <p>Ready to turn a prompt into a finished video?</p>
+          <a href={APP_STORE} target="_blank" rel="noopener noreferrer" aria-label="Download Wordream on the App Store" data-app-store-cta>
+            <span>Download for iPhone</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </article>
+
+      <a href="/compare" class="compare-back"><span aria-hidden="true">←</span> All comparisons</a>
+    </div>
+  </main>
+
+  <script type="application/ld+json" is:set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Wordream vs. Edits (by Instagram)",
+    "description": "Edits is Meta's free, manual mobile editor built around Instagram. Wordream is also mobile, but it's automatic — it writes, narrates, and assembles for you, then lets you adjust.",
+    "about": ["Wordream", "Edits (by Instagram)"],
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://wordream.com/compare/reelful-vs-edits" },
+    "publisher": { "@type": "Organization", "name": "Wordream", "url": "https://wordream.com" }
+  })} />
+</Layout>

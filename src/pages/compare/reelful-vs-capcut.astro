@@ -1,0 +1,84 @@
+---
+// Wordream vs. CapCut
+import Layout from "../../layouts/BaseLayout.astro";
+
+const APP_STORE = "https://apps.apple.com/app/wordream";
+
+const rows = [
+  { label: "Core idea", competitor: "A manual editor with effects & templates", wordream: "Agentic video creation with a built-in editor" },
+  { label: "Who does the editing", competitor: "You", wordream: "Wordream (you can adjust after)" },
+  { label: "Script & narration", competitor: "You write & record", wordream: "Written for you, narrated in your real or cloned voice" },
+  { label: "Where it runs", competitor: "Mobile and desktop", wordream: "Mobile-native (meets your media where it lives)" },
+  { label: "Editing control", competitor: "Full, manual", wordream: "Automatic + built-in editor for tweaks" },
+  { label: "Template library", competitor: "Timeline-based", wordream: "Direction-based — select the type of clip you want" },
+  { label: "Best for", competitor: "People who want to edit", wordream: "People who want the finished clip without editing" },
+];
+---
+
+<Layout
+  title="Wordream vs. CapCut — Wordream"
+  description="CapCut hands you a powerful editor and you do the editing. Wordream does the editing for you — on your phone, narrated in your voice — with a built-in editor for tweaks"
+  darkNav={false}
+>
+  <main class="compare-page">
+    <div class="compare-shell">
+      <article class="compare-article">
+        <header class="compare-lede">
+          <p class="section-index">Wordream vs. CapCut</p>
+          <h1>Wordream vs. CapCut</h1>
+          <p class="compare-summary">CapCut hands you a powerful editor and you do the editing. Wordream does all the editing for you following your instructions and then still lets you fine-tune in a built-in editor</p>
+        </header>
+
+        <div class="compare-table" role="table" aria-label="Wordream vs. CapCut">
+          <div class="compare-row compare-row--head" role="row">
+            <span class="compare-cell compare-cell--label" role="columnheader"></span>
+            <span class="compare-cell compare-cell--competitor" role="columnheader">CapCut</span>
+            <span class="compare-cell compare-cell--reelful" role="columnheader">Wordream</span>
+          </div>
+          {rows.map((r) => (
+            <div class="compare-row" role="row">
+              <span class="compare-cell compare-cell--label" role="rowheader">{r.label}</span>
+              <span class="compare-cell compare-cell--competitor" role="cell">
+                <span class="compare-cell-tag" aria-hidden="true">CapCut</span>
+                {r.competitor}
+              </span>
+              <span class="compare-cell compare-cell--reelful" role="cell">
+                <span class="compare-cell-tag" aria-hidden="true">Wordream</span>
+                {r.wordream}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div class="compare-verdict">
+          <p class="compare-verdict-item">
+            <strong>Choose CapCut if</strong> hands-on, frame-by-frame editing and a huge effects library are the point
+          </p>
+          <p class="compare-verdict-item">
+            <strong>Choose Wordream if</strong> you want a posted clip in minutes without learning a timeline
+          </p>
+        </div>
+
+        <div class="compare-cta">
+          <p>Ready to turn a prompt into a finished video?</p>
+          <a href={APP_STORE} target="_blank" rel="noopener noreferrer" aria-label="Download Wordream on the App Store" data-app-store-cta>
+            <span>Download for iPhone</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </article>
+
+      <a href="/compare" class="compare-back"><span aria-hidden="true">←</span> All comparisons</a>
+    </div>
+  </main>
+
+  <script type="application/ld+json" is:set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Wordream vs. CapCut",
+    "description": "CapCut hands you a powerful editor and you do the editing. Wordream does the editing for you — on your phone, narrated in your voice — with a built-in editor for tweaks",
+    "about": ["Wordream", "CapCut"],
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://wordream.com/compare/reelful-vs-capcut" },
+    "publisher": { "@type": "Organization", "name": "Wordream", "url": "https://wordream.com" }
+  })} />
+</Layout>

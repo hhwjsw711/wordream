@@ -1,0 +1,83 @@
+---
+// Wordream vs. video-editing MCPs
+import Layout from "../../layouts/BaseLayout.astro";
+
+const APP_STORE = "https://apps.apple.com/app/wordream";
+
+const rows = [
+  { label: "Setup", competitor: "Install + connect a desktop AI client via MCP", wordream: "Download one app, sign in" },
+  { label: "Where it runs", competitor: "Desktop / browser", wordream: "Mobile-native" },
+  { label: "Where your footage has to be", competitor: "Moved onto the desktop / uploaded", wordream: "Already on your phone — used in place" },
+  { label: "Who it's for", competitor: "Technical users comfortable with AI clients", wordream: "Anyone with a phone and a camera roll" },
+  { label: "How you control it", competitor: "Type prompts to an AI agent", wordream: "Type prompts to an AI agent or select styles from a menu" },
+  { label: "Best for", competitor: "Pros editing long footage at a desk", wordream: "Everyday creators posting from their phone" },
+];
+---
+
+<Layout
+  title="Wordream vs. video-editing MCPs — Wordream"
+  description="MCP editors are powerful desktop tools for technical users — install a desktop AI client, connect over MCP, move your footage across, then edit by chat. Wordream needs none of that: it is a phone app."
+  darkNav={false}
+>
+  <main class="compare-page">
+    <div class="compare-shell">
+      <article class="compare-article">
+        <header class="compare-lede">
+          <p class="section-index">Wordream vs. Video-editing MCPs</p>
+          <h1>Wordream vs. video-editing MCPs</h1>
+          <p class="compare-summary">MCP editors are powerful, but they are desktop tools for technical users: you install a desktop AI client (Claude, Codex, Cursor), connect it over MCP, get your footage onto the desktop, then edit by chat. Wordream needs none of that — it is a phone app, footage is already on the phone, and the agentic environment is already set up on the cloud</p>
+        </header>
+
+        <div class="compare-table" role="table" aria-label="Wordream vs. video-editing MCPs">
+          <div class="compare-row compare-row--head" role="row">
+            <span class="compare-cell compare-cell--label" role="columnheader"></span>
+            <span class="compare-cell compare-cell--competitor" role="columnheader">Video-editing MCPs</span>
+            <span class="compare-cell compare-cell--reelful" role="columnheader">Wordream</span>
+          </div>
+          {rows.map((r) => (
+            <div class="compare-row" role="row">
+              <span class="compare-cell compare-cell--label" role="rowheader">{r.label}</span>
+              <span class="compare-cell compare-cell--competitor" role="cell">
+                <span class="compare-cell-tag" aria-hidden="true">Video-editing MCPs</span>
+                {r.competitor}
+              </span>
+              <span class="compare-cell compare-cell--reelful" role="cell">
+                <span class="compare-cell-tag" aria-hidden="true">Wordream</span>
+                {r.wordream}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div class="compare-verdict">
+          <p class="compare-verdict-item">
+            <strong>Choose Video-editing MCPs if</strong> you're technical, work at a desk, and want an AI agent driving a full editor locally
+          </p>
+          <p class="compare-verdict-item">
+            <strong>Choose Wordream if</strong> you want to go from camera roll to posted clip on your phone, no setup, agent is running in the cloud
+          </p>
+        </div>
+
+        <div class="compare-cta">
+          <p>Ready to turn a prompt into a finished video?</p>
+          <a href={APP_STORE} target="_blank" rel="noopener noreferrer" aria-label="Download Wordream on the App Store" data-app-store-cta>
+            <span>Download for iPhone</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </article>
+
+      <a href="/compare" class="compare-back"><span aria-hidden="true">←</span> All comparisons</a>
+    </div>
+  </main>
+
+  <script type="application/ld+json" is:set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Wordream vs. video-editing MCPs",
+    "description": "MCP editors are powerful desktop tools for technical users — install a desktop AI client, connect over MCP, move your footage across, then edit by chat. Wordream needs none of that: it is a phone app.",
+    "about": ["Wordream", "Video-editing MCPs"],
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://wordream.com/compare/reelful-vs-mcp-editors" },
+    "publisher": { "@type": "Organization", "name": "Wordream", "url": "https://wordream.com" }
+  })} />
+</Layout>

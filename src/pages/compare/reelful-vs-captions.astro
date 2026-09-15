@@ -1,0 +1,83 @@
+---
+// Wordream vs. Captions
+import Layout from "../../layouts/BaseLayout.astro";
+
+const APP_STORE = "https://apps.apple.com/app/wordream";
+
+const rows = [
+  { label: "Clips per project", competitor: "One clip", wordream: "Up to 20 clips in a single project" },
+  { label: "How editing works", competitor: "Pick an AI edit template, apply to your clip", wordream: "Describe what you want — Wordream assembles and edits from your footage" },
+  { label: "Content types", competitor: "Templates skew toward speak-to-camera and talking-head", wordream: "Arbitrary clips — speak-to-camera, travel recaps, mixed moments, and more" },
+  { label: "Voice", competitor: "AI voices + cloning", wordream: "Your real or cloned voice narrating your clips" },
+  { label: "Flexibility", competitor: "Template library — choose a style, one clip at a time", wordream: "Open-ended — practically any style based on your instructions" },
+  { label: "Best for", competitor: "Creators polishing a single on-camera clip with a template", wordream: "Creators turning many raw moments into one finished clip" },
+];
+---
+
+<Layout
+  title="Wordream vs. Captions — Wordream"
+  description="Captions applies AI edit templates to a single clip — mostly speak-to-camera. Wordream assembles up to 20 arbitrary clips per project from your instructions, with real or cloned voice."
+  darkNav={false}
+>
+  <main class="compare-page">
+    <div class="compare-shell">
+      <article class="compare-article">
+        <header class="compare-lede">
+          <p class="section-index">Wordream vs. Captions</p>
+          <h1>Wordream vs. Captions</h1>
+          <p class="compare-summary">Captions is a mobile AI studio where you pick from edit templates — mostly built for speak-to-camera — and apply them to one clip at a time. Wordream takes up to 20 arbitrary clips from your camera roll and edits them based on your instructions: speak-to-camera, travel recaps, mixed moments — with your real or cloned voice</p>
+        </header>
+
+        <div class="compare-table" role="table" aria-label="Wordream vs. Captions">
+          <div class="compare-row compare-row--head" role="row">
+            <span class="compare-cell compare-cell--label" role="columnheader"></span>
+            <span class="compare-cell compare-cell--competitor" role="columnheader">Captions</span>
+            <span class="compare-cell compare-cell--reelful" role="columnheader">Wordream</span>
+          </div>
+          {rows.map((r) => (
+            <div class="compare-row" role="row">
+              <span class="compare-cell compare-cell--label" role="rowheader">{r.label}</span>
+              <span class="compare-cell compare-cell--competitor" role="cell">
+                <span class="compare-cell-tag" aria-hidden="true">Captions</span>
+                {r.competitor}
+              </span>
+              <span class="compare-cell compare-cell--reelful" role="cell">
+                <span class="compare-cell-tag" aria-hidden="true">Wordream</span>
+                {r.wordream}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        <div class="compare-verdict">
+          <p class="compare-verdict-item">
+            <strong>Choose Captions if</strong> you are working with one speak-to-camera clip and want a quick template-based AI polish
+          </p>
+          <p class="compare-verdict-item">
+            <strong>Choose Wordream if</strong> you have multiple clips to combine and want editing driven by what you describe, not a template
+          </p>
+        </div>
+
+        <div class="compare-cta">
+          <p>Ready to turn a prompt into a finished video?</p>
+          <a href={APP_STORE} target="_blank" rel="noopener noreferrer" aria-label="Download Wordream on the App Store" data-app-store-cta>
+            <span>Download for iPhone</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </article>
+
+      <a href="/compare" class="compare-back"><span aria-hidden="true">←</span> All comparisons</a>
+    </div>
+  </main>
+
+  <script type="application/ld+json" is:set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Wordream vs. Captions",
+    "description": "Captions applies AI edit templates to a single clip — mostly speak-to-camera. Wordream assembles up to 20 arbitrary clips per project from your instructions, with real or cloned voice.",
+    "about": ["Wordream", "Captions"],
+    "mainEntityOfPage": { "@type": "WebPage", "@id": "https://wordream.com/compare/reelful-vs-captions" },
+    "publisher": { "@type": "Organization", "name": "Wordream", "url": "https://wordream.com" }
+  })} />
+</Layout>

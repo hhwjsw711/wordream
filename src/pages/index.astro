@@ -13,7 +13,7 @@ const ONELINK = "https://wordream.onelink.me/3ffm/yecmia8x";
     class="brand-lockup z-[100] block absolute top-[2.5vh] left-[5.09vw] md:top-[3.1vh] md:left-[2.18vw] lg:left-[3.27vw]"
     aria-label="Wordream home"
   >
-    <img src="/assets/wordream-mark.svg" alt="" width="438" height="145" class="brand-art h-auto w-16 md:w-20 brand-art--white" />
+    <img src="/assets/reelful-mark.svg" alt="" width="438" height="145" class="brand-art h-auto w-16 md:w-20 brand-art--white" />
   </a>
 
   <main class="relative z-10 overflow-hidden">
@@ -255,7 +255,7 @@ const ONELINK = "https://wordream.onelink.me/3ffm/yecmia8x";
             <p class="plan-allowance">Volume and billing for your team</p>
             <p class="plan-detail">We will tailor a plan to how your organization uses Wordream at scale</p>
           </div>
-          <a class="btn-primary btn-dark" href="mailto:hello@wordream.app"> Talk to us<span aria-hidden="true">↗</span> </a>
+          <a class="btn-primary btn-dark" href="mailto:hello@wordream.com"> Talk to us<span aria-hidden="true">↗</span> </a>
         </article>
       </div>
     </section>
@@ -272,7 +272,7 @@ const ONELINK = "https://wordream.onelink.me/3ffm/yecmia8x";
           Download Wordream <span aria-hidden="true">↗</span>
         </a>
       </div>
-      <img class="brand-glyph brand-glyph--cta" src="/assets/wordream-mark.svg" alt="" aria-hidden="true" />
+      <img class="brand-glyph brand-glyph--cta" src="/assets/reelful-mark.svg" alt="" aria-hidden="true" />
     </section>
   </main>
 
@@ -341,4 +341,23 @@ const ONELINK = "https://wordream.onelink.me/3ffm/yecmia8x";
       sync();
     })();
   </script>
+
+  <script type="application/ld+json" is:set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "Wordream",
+    "applicationCategory": "MultimediaApplication",
+    "operatingSystem": "iOS",
+    "description": "Describe a video in plain words, add optional media, and let Wordream generate the edit, motion, text, music, voiceover, and captions. Refine it by chat or in the editor.",
+    "offers": [
+      { "@type": "Offer", "name": "Creator", "price": "24.99", "priceCurrency": "USD", "description": "3,000 credits per month" },
+      { "@type": "Offer", "name": "Pro", "price": "49.99", "priceCurrency": "USD", "description": "7,500 credits per month" },
+      { "@type": "Offer", "name": "Studio", "price": "99.99", "priceCurrency": "USD", "description": "18,000 credits per month" }
+    ],
+    "url": "https://wordream.com",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Wordream"
+    }
+  })} />
 </Layout>
